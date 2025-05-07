@@ -1,0 +1,57 @@
+site_name: Karabo UUTID Server
+site_description: A UUTID provider for the Karabo distributed Control System
+site_url: https://karabo_uutidserver.readthedocs.io/en/latest/
+repo_url: https://www.github.com/European-XFEL/Karabo
+copyright: European XFEL GmbH
+docs_dir: docs
+
+theme:
+  name: material
+  logo: images/logo.png
+  palette:
+    scheme: preference
+    language: en
+  features:
+    - announce.dismiss
+    - content.tabs.link
+    - navigation.indexes # section index pages
+    - navigation.expand  # expand sections on left sidebar by default
+    - navigation.top # back to top button
+    - navigation.tracking
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+nav:
+  - index.md
+
+markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+- search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/European-XFEL
