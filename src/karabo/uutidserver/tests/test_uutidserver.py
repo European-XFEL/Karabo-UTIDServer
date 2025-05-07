@@ -23,8 +23,13 @@ class TestConnector(Device):
         self.recv_uutids = []
         # we use the internal async_connect function here,
         # just like the MDL server does.
-        await self._ss.async_connect(
-                self.timeServerId, "signalTimeTick", self.slotTimeTick)
+        try:
+            await self._ss.async_connect(
+                    self.timeServerId, "signalTimeTick", self.slotTimeTick)
+        except AttributeError:
+            # Karabo 3 has renamed ._ss to ._sigslot.
+            await self._sigslot.async_connect(
+                    self.timeServerId, "signalTimeTick", self.slotTimeTick)
         self.state = State.ACTIVE
 
     def onDestruction(self):
