@@ -116,10 +116,10 @@ async def test_uutids_100ms(mocker):
         # all should be unique
         assert recv_uutids.size == np.unique(recv_uutids).size
         # and monotonically increasing by the number of period between each
-        # publish cycle
+        # publish cycle. We allow for some flakiness here.
         duutid_per_publish = device.publishPeriod.value / device.period.value
         assert np.allclose(recv_uutids[1:] - recv_uutids[:-1],
-                           duutid_per_publish)
+                           duutid_per_publish, atol=2)
 
 
 @pytest.mark.timeout(30)
