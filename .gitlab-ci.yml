@@ -2,7 +2,7 @@ variables:
   USE_ISORT: "false"
   USE_FLAKE: "false"
   USE_PRE_COMMIT: "true"
-  PKG_COVERAGE: "karabo.uutidserver"
+  PKG_COVERAGE: "karabo.utidserver"
   DOC_DIRECTORY: docs
 
 include:

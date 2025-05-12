@@ -6,10 +6,10 @@ build-backend = "setuptools.build_meta" # If not defined, then legacy behavior c
 
 
 [project]
-name = "karabo.uutidserver"
+name = "karabo-utidserver"
 
 version = "0.0.1"
-description = "A provider of Universal Unique Time IDs, UUTIDs"
+description = "A provider of Universal Unique Time IDs, UTIDs"
 readme = "README.md"
 requires-python = ">=3.12"
 license = { file = "LICENSE.md" }
@@ -49,4 +49,4 @@ dependencies = [
 test = ["pytest", "coverage"]
 
 [project.entry-points."karabo.middlelayer_device"]
-Hdf5Writer = "karabo.uutidserver.uutid_server:UUTIDServer"
+UTIDServer = "karabo_utidserver.utid_server:UTIDServer"

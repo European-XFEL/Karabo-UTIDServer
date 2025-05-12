@@ -1,6 +1,6 @@
-site_name: Karabo UUTID Server
-site_description: A UUTID provider for the Karabo distributed Control System
-site_url: https://karabo_uutidserver.readthedocs.io/en/latest/
+site_name: Karabo UTID Server
+site_description: A UTID provider for the Karabo distributed Control System
+site_url: https://karabo_utidserver.readthedocs.io/en/latest/
 repo_url: https://www.github.com/European-XFEL/Karabo
 copyright: European XFEL GmbH
 docs_dir: docs

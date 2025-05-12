@@ -7,20 +7,20 @@ from karabo.middlelayer import (
     background, isSet, sleep)
 
 
-class UUTIDServer(Device):
-    """ A minimal device that provides unique timing identifiers (UUTID)s.
+class UTIDServer(Device):
+    """ A minimal device that provides unique timing identifiers (UTID)s.
 
-    This device provides Universal Unique Timing Identifiers (UUTID)s to
+    This device provides Universal Unique Timing Identifiers (UTID)s to
     a distributed Karabo installation, by emitting `signalTimeTick`s.
 
-    In the EuXFEL context a UUTID corresponds to a train id.
+    In the EuXFEL context a UTID corresponds to a train id.
 
     In this basic implementation the POSIX timestamp is used to deduce the
-    UUTID on the precision of `period`.
+    UTID on the precision of `period`.
 
     The device can be subclassed to implement more sophisticated timing
     provision, e.g. on-top of a protocal like White Rabbit. In this case
-    the `get_uutid` needs to be overwritten.
+    the `get_utid` needs to be overwritten.
     """
     period = UInt64(
         displayedName="Period",
@@ -49,8 +49,8 @@ class UUTIDServer(Device):
             assert value >= self.period
         self.publishPeriod = value
 
-    currentUUTID = UInt64(
-        displayedName="Current UUTID",
+    currentUTID = UInt64(
+        displayedName="Current UTID",
         accessMode=AccessMode.READONLY,
     )
 
@@ -66,24 +66,24 @@ class UUTIDServer(Device):
 
     async def _timer(self):
         # both are in ms, we convert here to .value so we can pass
-        # a plain Python type to `get_uutid`.
+        # a plain Python type to `get_utid`.
         # we ensure we publish once, right on start-up
         time_to_publish = self.period.value
         period = self.period.value
         while True:
-            uutid, sec, frac, period = await self.get_uutid(period)
+            utid, sec, frac, period = await self.get_utid(period)
             time_to_publish -= period
 
             if time_to_publish <= 0:
                 # the period published here is in microseconds
-                self.signalTimeTick(uutid, sec, frac, period * 1000)
+                self.signalTimeTick(utid, sec, frac, period * 1000)
                 time_to_publish = self.publishPeriod.value
-                self.currentUUTID = uutid
+                self.currentUTID = utid
 
             await sleep(period / 1000)  # in seconds
 
-    async def get_uutid(self, period: int) -> tuple[int, int, int, int]:
-        """ Return a current UUTID
+    async def get_utid(self, period: int) -> tuple[int, int, int, int]:
+        """ Return a current UTID
 
         Overwrite this method if you do not wish to use the default
         implementation which returns the current UNIX timestamp at the
@@ -92,17 +92,17 @@ class UUTIDServer(Device):
         # the current timestamp in seconds, as a float, with precision up
         # to microseconds
         now = datetime.now()
-        uutid = now.timestamp()
+        utid = now.timestamp()
 
         # extract the seconds and fractional part
-        sec = int(uutid)
-        frac = abs(sec - uutid) * 1e9
+        sec = int(utid)
+        frac = abs(sec - utid) * 1e9
 
         # push up to the period precision before the decimal
-        uutid = uutid * (1000 / period)
+        utid = utid * (1000 / period)
 
         # finally reduce to an int, truncating towards 0 in the process.
         # we cast to np.uint64 to ensure the correct integer type.
-        uutid = np.uint64(uutid)
+        utid = np.uint64(utid)
 
-        return uutid, sec, frac, period
+        return utid, sec, frac, period

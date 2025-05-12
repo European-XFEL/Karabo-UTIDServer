@@ -1,24 +1,24 @@
-# UUTID Server
+# UTID Server
 
-The `UUTIDServer` device  provides Universal Unique Timing Identifiers (UUTID)s
+The `UTIDServer` device  provides Universal Unique Timing Identifiers (UTID)s
 to a distributed Karabo installation, by emitting `signalTimeTick`s.
 
-In the EuXFEL context a UUTID corresponds to a train id.
+In the EuXFEL context a UTID corresponds to a train id.
 
 In this basic implementation the POSIX timestamp is used to deduce the
-UUTID on the precision of `period`.
+UTID on the precision of `period`.
 
 The device can be subclassed to implement more sophisticated timing
 provision, e.g. on-top of a protocol like White Rabbit. In this case
-the `get_uutid` needs to be overwritten.
+the `get_utid` needs to be overwritten.
 
 ## Concept
 
 The graph below shows the general timing concept used in Karabo to 
-distribute UUTIDs. This device is what is called a `Time Server` in the
+distribute UTIDs. This device is what is called a `Time Server` in the
 graph. It calls `signalTimeTick` every `updatePeriod` $\Delta t_U$, passing
 the `period` $\delta t_p$ with which device servers internally interpolate the
-UUTIDs.
+UTIDs.
 
 ``` mermaid
 
@@ -44,7 +44,7 @@ direction LR
 ## Configuration Options
 
 The device has two configuration options. The **period** specifies the
-base period between two UUTIDs in milliseconds. The **updatePeriod**
+base period between two UTIDs in milliseconds. The **updatePeriod**
 property determines how frequently a `signalTimeTick` is actually sent to
 the distributed system. It should be equal to, or larger `period`. Karabo
 servers internally interpolate between `signalTimeTicks`, so a larger value
