@@ -1,0 +1,52 @@
+[build-system]
+# A list of packages that are needed to build your package:
+requires = ["setuptools"] # REQUIRED if [build-system] table is used
+# The name of the Python object that frontends will use to perform the build:
+build-backend = "setuptools.build_meta" # If not defined, then legacy behavior can happen.
+
+
+[project]
+name = "karabo-utidserver"
+
+version = "0.0.1"
+description = "A provider of Universal Unique Time IDs, UTIDs"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { file = "LICENSE.md" }
+authors = [{ name = "S. Hauf", email = "steffen.hauf@xfel.eu" }]
+maintainers = [
+  { name = "S. Hauf", email = "steffen.hauf@xfel.eu" },
+]
+
+# Classifiers help users find your project by categorizing it.
+#
+# For a list of valid classifiers, see https://pypi.org/classifiers/
+classifiers = [
+  # How mature is this project? Common values are
+  #   3 - Alpha
+  #   4 - Beta
+  #   5 - Production/Stable
+  "Development Status :: 4 - Beta",
+
+  # Indicate who your project is intended for
+  "Intended Audience :: Developers",
+
+  # Pick your license as you wish
+  "License :: OSI Approved :: MIT License",
+
+  # Specify the Python versions you support here. In particular, ensure
+  # that you indicate you support Python 3. These classifiers are *not*
+  # checked by "pip install". See instead "requires-python" key in this file.
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3 :: Only",
+]
+
+dependencies = [
+    "karabo[karathon]",
+]
+
+[project.optional-dependencies]
+test = ["pytest", "coverage"]
+
+[project.entry-points."karabo.middlelayer_device"]
+UTIDServer = "karabo_utidserver.utid_server:UTIDServer"

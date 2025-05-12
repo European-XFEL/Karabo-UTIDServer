@@ -1,0 +1,35 @@
+---
+exclude: |
+  (?x)(
+      ^docs/
+  )
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-added-large-files
+      - id: check-json
+      - id: destroyed-symlinks
+      - id: check-symlinks
+      - id: check-xml
+      - id: pretty-format-json
+        args: [--autofix]
+  - repo: https://github.com/pycqa/isort
+    rev: 5.11.5
+    hooks:
+      - id: isort
+        name: isort device
+        files: ^src/
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+        files: ^src/
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.4.0
+    hooks:
+      - id: pyupgrade
+        args: [--py311-plus]
+        files: ^src/
