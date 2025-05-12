@@ -9,7 +9,7 @@ In this basic implementation the POSIX timestamp is used to deduce the
 UUTID on the precision of `period`.
 
 The device can be subclassed to implement more sophisticated timing
-provision, e.g. on-top of a protocal like White Rabbit. In this case
+provision, e.g. on-top of a protocol like White Rabbit. In this case
 the `get_uutid` needs to be overwritten.
 
 ## Concept
