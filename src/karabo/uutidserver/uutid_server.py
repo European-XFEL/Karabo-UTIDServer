@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import numpy as np
+
 from karabo.middlelayer import (
     AccessLevel, AccessMode, Device, MetricPrefix, Signal, State, UInt64, Unit,
     background, isSet, sleep)
@@ -100,6 +102,7 @@ class UUTIDServer(Device):
         uutid = uutid * (1000 / period)
 
         # finally reduce to an int, truncating towards 0 in the process.
-        uutid = int(uutid)
+        # we cast to np.uint64 to ensure the correct integer type.
+        uutid = np.uint64(uutid)
 
         return uutid, sec, frac, period
