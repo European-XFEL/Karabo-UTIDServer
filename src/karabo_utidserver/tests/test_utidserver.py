@@ -23,10 +23,10 @@ class TestConnector(Device):
         # we use the internal async_connect function here,
         # just like the MDL server does.
         try:
-            await self._ss.async_connect(
+            await self.signalSlotable.async_connect(
                     self.timeServerId, "signalTimeTick", self.slotTimeTick)
         except AttributeError:
-            # Karabo 3 has renamed ._ss to ._sigslot.
+            # Karabo 3 has renamed .signalSlotable to ._sigslot.
             await self._sigslot.async_connect(
                     self.timeServerId, "signalTimeTick", self.slotTimeTick)
         self.state = State.ACTIVE
@@ -64,12 +64,12 @@ class TestConnector(Device):
 async def test_utids_100ms(mocker):
     test_id = create_instanceId()
     _TEST_CONFIG_ = {
-        "_deviceId_": f"{test_id}",
+        "deviceId": f"{test_id}",
         "publishPeriod": 1000,  # ms
     }
 
     _CONNECTOR_CONFIG_ = {
-        "_deviceId_": f"timer_{test_id}",
+        "deviceId": f"timer_{test_id}",
         "timeServerId": f"{test_id}",
     }
 
@@ -133,7 +133,7 @@ async def test_update_period_must_be_larger_equal_period(mocker):
 
     # this should fail because publishPeriod is less than period.
     _TEST_CONFIG_ = {
-        "_deviceId_": f"{test_id}",
+        "deviceId": f"{test_id}",
         "period": 100,  # ms
         "publishPeriod": 10,  # ms
     }
@@ -143,7 +143,7 @@ async def test_update_period_must_be_larger_equal_period(mocker):
 
     # this should work
     _TEST_CONFIG_ = {
-        "_deviceId_": f"{test_id}",
+        "deviceId": f"{test_id}",
         "period": 10,  # ms
         "publishPeriod": 10,  # ms
     }
