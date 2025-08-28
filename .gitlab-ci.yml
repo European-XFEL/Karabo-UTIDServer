@@ -12,9 +12,3 @@ include:
   - project: karabo/gitlabci
     file: .pages-markdown-ci.yml
     ref: main
-
-pytest:
-  parallel:
-    matrix:
-      - ARCH_TAG:   ["redhat-9-004"]
-        KARABO_TAG: ["2.21.2", "latest_prerelease_build"]
