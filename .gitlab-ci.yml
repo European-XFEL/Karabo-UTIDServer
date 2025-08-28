@@ -4,6 +4,7 @@ variables:
   USE_PRE_COMMIT: "true"
   PKG_COVERAGE: "karabo.utidserver"
   DOC_DIRECTORY: docs
+  USE_LEGACY_PYTEST: "false"
 
 include:
   - project: karabo/gitlabci
