@@ -6,6 +6,8 @@ from karabo.middlelayer import (
     AccessLevel, AccessMode, Device, MetricPrefix, Signal, State, UInt64, Unit,
     background, isSet, sleep)
 
+from ._version import __version__ as deviceVersion
+
 
 class UTIDServer(Device):
     """ A minimal device that provides unique timing identifiers (UTID)s.
@@ -22,6 +24,9 @@ class UTIDServer(Device):
     provision, e.g. on-top of a protocal like White Rabbit. In this case
     the `get_utid` needs to be overwritten.
     """
+
+    __version__ = deviceVersion
+
     period = UInt64(
         displayedName="Period",
         description="The time between ticks.",
