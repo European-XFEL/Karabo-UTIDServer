@@ -4,7 +4,10 @@ variables:
   USE_PRE_COMMIT: "true"
   PKG_COVERAGE: "karabo.utidserver"
   DOC_DIRECTORY: docs
+  BRANCH_NAME: "main"
   USE_LEGACY_PYTEST: "false"
+  AUTO_PYPI: "true"
+  USE_TEST_PYPI: "0"
 
 include:
   - project: karabo/gitlabci
@@ -12,4 +15,7 @@ include:
     ref: main
   - project: karabo/gitlabci
     file: .pages-markdown-ci.yml
+    ref: main
+  - project: karabo/gitlabci
+    file: .mirror-device.yml
     ref: main
